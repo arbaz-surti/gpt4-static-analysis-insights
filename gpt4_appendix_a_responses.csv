@@ -1,0 +1,86 @@
+Appendix,Rule,Severity,Full GPT-4 Response
+A.1,java:S1192,CRITICAL,"- **java:S1192** is a rule that detects when string literals are duplicated in a codebase. It's triggered when the same string is hard-coded in multiple places.
+
+- The severity is considered critical because repeated string literals make the process of changing strings error-prone, if you need to change the string in one place, you have to find all occurrences and change them too. This can lead to inconsistencies and bugs if any instance of the string is missed during modification.
+
+To address this issue across the codebase, developers should:
+
+1. Identify all instances where the rule is triggered. This can be done using your static analysis tool's reporting functionality.
+
+2. For each instance, determine if the string literal is indeed duplicated elsewhere in the codebase. If not, it may be a false positive.
+
+3. If the string is duplicated, consider defining it as a constant in a single, appropriate location. This could be in a constants class or in a class closely related to its use.
+
+4. Replace all instances of the duplicated string literal with a reference to the newly defined constant.
+
+5. Ensure that all tests pass after making these changes to confirm that nothing has broken as a result.
+
+6. Going forward, encourage the team to avoid duplicating string literals and instead use constants. This could be enforced through code reviews.
+
+7. Consider setting up automatic tooling to detect and possibly fix such issues in the future. This could be a linter or a more sophisticated static analysis tool."
+A.2,java:S1133,INFO,"- **java:S1133** is a rule that detects the use of deprecated code in your Java project. Deprecated code refers to functions, methods, or classes that are still available for use but are not recommended because they may be removed in future versions, or better alternatives exist.
+
+- The severity level of INFO is appropriate because deprecated code does not necessarily cause immediate problems or bugs. However, it is still important to address as it can lead to issues in the future, especially when updating to newer versions of the language or libraries.
+
+To address this issue across the codebase, the following steps can be taken:
+
+- Use your IDE or static analysis tool to locate all instances where the deprecated code is used. 
+
+- For each instance, identify the recommended alternative for the deprecated code. This information is often provided in the deprecation annotation or in the official documentation of the language or library.
+
+- Replace the deprecated code with its recommended alternative. Make sure to thoroughly test the new code to ensure it behaves as expected.
+
+- If the deprecated code is used in multiple places, consider creating a utility method or class that implements the new code. This can help ensure consistency and reduce the amount of code you need to write.
+
+- Once all deprecated code has been replaced, re-run your static analysis tool to confirm that the **java:S1133** rule no longer triggers.
+
+- Finally, consider setting up a process to regularly check for and address deprecated code. This can help prevent the issue from reoccurring in the future."
+A.3,java:S100,MINOR,"- The static analysis rule java:S100 detects issues related to naming conventions in Java. It is triggered when class, interface, enum, annotation, or method names do not follow the prescribed naming conventions (i.e., PascalCase for class names, camelCase for method names).
+
+- The severity of this rule is considered minor because it does not directly impact the functionality or performance of the code. However, it is important for readability, maintainability, and consistency across the codebase.
+
+To address this issue across the codebase, I would suggest the following steps:
+
+1. Review the naming conventions: Ensure all developers understand the naming conventions for classes, interfaces, enums, annotations, and methods in Java. The conventions are PascalCase for classes and camelCase for methods.
+
+2. Use an IDE with built-in static analysis: Most modern Integrated Development Environments (IDEs) have built-in static analysis tools that can highlight these issues in real-time as the code is being written.
+
+3. Refactor the code: Rename the classes, interfaces, enums, annotations, and methods that are not following the naming conventions. Be careful with methods that may be overridden or used in other parts of the codebase.
+
+4. Use automated tools: Consider using automated tools that can perform bulk renaming across the codebase. Be sure to thoroughly test your code after using these tools to ensure nothing has broken.
+
+5. Implement code reviews: Regular code reviews can catch these minor issues before they become widespread. Make checking for proper naming conventions part of the code review process.
+
+6. Continuous Integration: Incorporate static analysis into your Continuous Integration (CI) pipeline to catch these issues early and often. This will prevent new naming convention issues from entering the codebase."
+A.4,java:S1135,INFO,"- **java:S1135** is a rule that detects the presence of ""TODO"" tags in your code. These tags are typically used by developers to mark places in the code where additional work needs to be done or improvements can be made.
+
+- The severity of this rule is set to INFO because it doesn't directly affect the functionality of the code or introduce potential bugs. However, it's important to track these TODOs as they can indicate areas of the code that are incomplete or could be improved.
+
+To address this issue across the codebase, I would suggest the following:
+
+- Review all the instances where the rule has triggered. Understand why a TODO was added in the first place. If the task mentioned in the TODO is completed, remove the TODO comment.
+
+- If the task in the TODO is not completed and is still relevant, create a ticket or issue in your project management tool to track this work. This way, the work won't be forgotten and can be prioritized appropriately.
+
+- If the TODO is no longer relevant (the task is not needed anymore), remove the TODO comment.
+
+- Going forward, try to minimize the use of TODO comments. Instead, when you identify a task that needs to be done in the future, create a ticket or issue in your project management tool immediately. This will help ensure that all tasks are tracked and prioritized properly.
+
+- Consider implementing a code review process where TODO comments are not allowed to be introduced into the codebase without an associated ticket or issue in your project management tool. This can help enforce the practice of properly tracking all tasks."
+A.5,java:S1149,MAJOR,"- **java:S1149** detects the use of `java.util.SortedSet` and `java.util.SortedMap`'s `subSet`, `headSet`, `tailSet`, `subMap`, `headMap`, and `tailMap` methods without passing a comparator consistent with the set/map's comparator.
+
+- The severity is considered MAJOR because using these methods without a consistent comparator can lead to unexpected behavior and bugs in the code. These bugs can be difficult to identify and fix, and they can cause significant issues in the software's functionality.
+
+To address this issue across the codebase, developers can:
+
+- Review all instances where `subSet`, `headSet`, `tailSet`, `subMap`, `headMap`, and `tailMap` methods are used in the codebase.
+
+- Ensure that a comparator consistent with the set/map's comparator is passed when using these methods. If the set/map's comparator is null, then all elements to be added should be mutually comparable.
+
+- Consider creating a custom comparator class if the logic for comparison is complex or used in multiple places. This will ensure consistency and reduce the chance of errors.
+
+- Use automated refactoring tools if available and appropriate to replace the problematic code in a consistent manner.
+
+- Add unit tests to verify the correct behavior of the code after the changes. This will help prevent regression in the future.
+
+- Encourage all team members to be aware of this rule and the potential issues it can cause. This can be done through code reviews, training, or adding it to the team's coding standards documentation."
